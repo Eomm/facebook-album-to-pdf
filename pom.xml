@@ -31,7 +31,28 @@
 			<artifactId>logback-classic</artifactId>
 			<version>1.1.7</version>
 		</dependency>
-
-
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<finalName>facebook-album-to-pdf-build-${project.version}</finalName>
+					<appendAssemblyId>false</appendAssemblyId>
+					<archive>
+						<manifest>
+							<mainClass>it.manueomm.a2pdf.launcher.PublicAlbum</mainClass>
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<outputDirectory>${basedir}/build</outputDirectory>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
 </project>
