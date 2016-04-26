@@ -1,7 +1,7 @@
-package it.manueomm.a2pdf.launcher;
+package it.manueomm.facefile.launcher;
 
-import it.manueomm.a2pdf.AlbumToPdf;
-import it.manueomm.a2pdf.bean.RequestArgs;
+import it.manueomm.facefile.AlbumToPdf;
+import it.manueomm.facefile.bean.RequestArgs;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,9 +29,9 @@ import com.restfb.exception.FacebookGraphException;
  * @author Manuel Spigolon
  *
  */
-public class PublicAlbum {
+public class PublicAlbum2Pdf {
 
-   private static final Logger log = LoggerFactory.getLogger(PublicAlbum.class);
+   private static final Logger log = LoggerFactory.getLogger(PublicAlbum2Pdf.class);
 
    /**
     * Main program for getting facebook's album to PDF

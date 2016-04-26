@@ -1,7 +1,7 @@
-package it.manueomm.a2pdf.utils.pdf;
+package it.manueomm.facefile.utils.pdf;
 
-import it.manueomm.a2pdf.bean.AlbumWrapper;
-import it.manueomm.a2pdf.bean.PhotoWrapper;
+import it.manueomm.facefile.bean.AlbumWrapper;
+import it.manueomm.facefile.bean.PhotoWrapper;
 
 import java.io.File;
 import java.io.FileOutputStream;

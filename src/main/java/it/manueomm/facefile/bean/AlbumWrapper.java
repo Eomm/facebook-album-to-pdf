@@ -1,4 +1,4 @@
-package it.manueomm.a2pdf.bean;
+package it.manueomm.facefile.bean;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>it.manueomm</groupId>
-	<artifactId>facebook-album-to-pdf</artifactId>
+	<artifactId>facebook-album-to-file</artifactId>
 	<version>0.0.9</version>
-	<name>facebook-album-to-pdf</name>
-	<description>This tool allows to convert a facebook's album to a single PDF document.</description>
+	<name>facebook-album-to-file</name>
+	<description>This tool allows to convert a facebook's album to any file.</description>
 
 	<dependencies>
 		<dependency>
@@ -42,7 +42,7 @@
 					<appendAssemblyId>false</appendAssemblyId>
 					<archive>
 						<manifest>
-							<mainClass>it.manueomm.a2pdf.launcher.PublicAlbum</mainClass>
+							<mainClass>it.manueomm.facefile.launcher.PublicAlbum2Pdf</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>

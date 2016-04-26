@@ -1,4 +1,4 @@
-package it.manueomm.a2pdf.utils;
+package it.manueomm.facefile.utils;
 
 import java.util.HashMap;
 import java.util.Map;

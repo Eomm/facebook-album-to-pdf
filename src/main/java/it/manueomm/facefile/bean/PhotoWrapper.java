@@ -1,4 +1,4 @@
-package it.manueomm.a2pdf.bean;
+package it.manueomm.facefile.bean;
 
 import com.restfb.types.Photo;
 

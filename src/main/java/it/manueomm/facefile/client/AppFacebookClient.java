@@ -1,6 +1,6 @@
-package it.manueomm.a2pdf.client;
+package it.manueomm.facefile.client;
 
-import it.manueomm.a2pdf.utils.TokenFactory;
+import it.manueomm.facefile.utils.TokenFactory;
 
 import com.restfb.DefaultFacebookClient;
 import com.restfb.Version;

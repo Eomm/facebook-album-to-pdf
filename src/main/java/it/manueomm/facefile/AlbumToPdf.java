@@ -1,11 +1,11 @@
-package it.manueomm.a2pdf;
+package it.manueomm.facefile;
 
-import it.manueomm.a2pdf.bean.AlbumWrapper;
-import it.manueomm.a2pdf.bean.PhotoWrapper;
-import it.manueomm.a2pdf.client.AppFacebookClient;
-import it.manueomm.a2pdf.utils.Quality;
-import it.manueomm.a2pdf.utils.pdf.PDFAlbumCreator;
-import it.manueomm.a2pdf.utils.pdf.event.PageNumberEvent;
+import it.manueomm.facefile.bean.AlbumWrapper;
+import it.manueomm.facefile.bean.PhotoWrapper;
+import it.manueomm.facefile.client.AppFacebookClient;
+import it.manueomm.facefile.utils.Quality;
+import it.manueomm.facefile.utils.pdf.PDFAlbumCreator;
+import it.manueomm.facefile.utils.pdf.event.PageNumberEvent;
 
 import java.io.File;
 import java.io.IOException;
