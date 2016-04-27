@@ -1,10 +1,13 @@
 package it.manueomm.facefile.launcher;
 
-import it.manueomm.facefile.AlbumToPdf;
+import it.manueomm.facefile.FaceAlbumReader;
 import it.manueomm.facefile.bean.RequestArgs;
+import it.manueomm.facefile.converter.impl.PdfConverter;
+import it.manueomm.facefile.exceptions.ConvertException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,18 +54,20 @@ public class PublicAlbum2Pdf {
       try {
          RequestArgs request = checkArgs(args);
 
-         AlbumToPdf converter = new AlbumToPdf(request.getAppId(), request.getAppSecret(), request.getWorkingPath());
+         FaceAlbumReader reader = new FaceAlbumReader(request.getAppId(), request.getAppSecret(), request.getWorkingPath());
+         reader.addConverter(new PdfConverter());
          for (String album : request.getCopyAlbum()) {
             try {
                log.info("## Start converting album id:" + album);
-               File pdf = new File(request.getWorkingPath(), "Album - " + album + ".pdf");
-               converter.convertPublicAlbumToPdf(album, pdf);
-               log.info("## Created PDF album: " + pdf.getAbsolutePath());            
+               List<File> done = reader.convertPublicAlbum(album);
+               for (File outFile : done) {
+                  log.info("## Created PDF album: " + outFile.getAbsolutePath());
+               }
             
             } catch (FacebookGraphException fex) {
                log.error("## Error reading facebook album id: " + album, fex);
-            } catch (IOException ex) {
-               log.error("## Error creating pdf", ex);
+            } catch (ConvertException ex) {
+               log.error("## Error converting album", ex);
             }
          }
 

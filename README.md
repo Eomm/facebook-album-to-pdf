@@ -6,7 +6,7 @@ This tool allows to convert a facebook's album to a any document.
 - A Facebook appId and appSecret [how to get it]
 
 ### How to convert a public album to PDF
-- Download the build of *facebook-album-to-pdf-build-?.?.?.jar*
+- Download the build of *facebook-album-to-file-build-?.?.?.jar*
 - Run from command line
 ```sh
 java -jar .build\facebook-album-to-pdf-0.0.9-build.jar "{your app Id}" "{your app secret}" "{local directory}" "{facebook album 1}" "{facebook album 2}" ... "{facebook album n}"
@@ -18,16 +18,16 @@ java -jar facebook-album-to-pdf-0.0.9-build.jar "xx2077yy27zz42ww" "xyze22fxyzd2
 
 INFO it.manueomm.facefile.launcher.PublicAlbum - Facebook Album to PDF..
 INFO it.manueomm.facefile.launcher.PublicAlbum - ## Start converting album id:1877963512xxxxx
-DEBUG it.manueomm.facefile.AlbumToPdf - Reading album.. 1877963512xxxxx
-DEBUG it.manueomm.facefile.AlbumToPdf - Saved image E:\converter\1877963512xxxxx\Photo00.jpg
+DEBUG it.manueomm.facefile.FaceAlbumReader - Reading album.. 1877963512xxxxx
+DEBUG it.manueomm.facefile.FaceAlbumReader - Saved image E:\converter\1877963512xxxxx\Photo00.jpg
 [...]
-DEBUG it.manueomm.facefile.AlbumToPdf - Read page: 1
-DEBUG it.manueomm.facefile.AlbumToPdf - Saved image E:\converter\1877963512xxxxx\Photo25.jpg
+DEBUG it.manueomm.facefile.FaceAlbumReader - Read page: 1
+DEBUG it.manueomm.facefile.FaceAlbumReader - Saved image E:\converter\1877963512xxxxx\Photo25.jpg
 [...]
-DEBUG it.manueomm.facefile.AlbumToPdf - Read page: 2
-DEBUG it.manueomm.facefile.AlbumToPdf - Saved image E:\converter\1877963512xxxxx\Photo074.jpg
-DEBUG it.manueomm.facefile.AlbumToPdf - Read page: 3
-INFO it.manueomm.facefile.AlbumToPdf - Saved images in ms: 28551
+DEBUG it.manueomm.facefile.FaceAlbumReader - Read page: 2
+DEBUG it.manueomm.facefile.FaceAlbumReader - Saved image E:\converter\1877963512xxxxx\Photo074.jpg
+DEBUG it.manueomm.facefile.FaceAlbumReader - Read page: 3
+INFO it.manueomm.facefile.FaceAlbumReader - Saved images in ms: 28551
 INFO it.manueomm.facefile.launcher.PublicAlbum - ## Created PDF album: E:\converter\Album - 1877963512xxxxx.pdf
 ```
 
@@ -39,8 +39,10 @@ facebook-album-to-file uses a number of open source projects to work properly:
 - [Logback]
 
 ### Todos
+- JUnit Test
+- Implement HTML Converter
 - Improve scaled image in PDF
-- Build a GUI
+- Build a GUI for consumers
 
 
 [download]: <https://www.java.com/it/download/>
