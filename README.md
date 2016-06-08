@@ -2,7 +2,7 @@
 This tool allows to convert a facebook's album to a any document.
 
 ### Prerequisites
-- Java (JRE) >= 1.5 [download]
+- Java (JRE) >= 1.8 [download]
 - A Facebook appId and appSecret [how to get it]
 
 ### How to convert a public album to PDF

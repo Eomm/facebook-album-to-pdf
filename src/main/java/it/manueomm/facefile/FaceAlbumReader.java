@@ -1,12 +1,5 @@
 package it.manueomm.facefile;
 
-import it.manueomm.facefile.bean.AlbumWrapper;
-import it.manueomm.facefile.bean.PhotoWrapper;
-import it.manueomm.facefile.client.AppFacebookClient;
-import it.manueomm.facefile.converter.IAlbumConverter;
-import it.manueomm.facefile.exceptions.ConvertException;
-import it.manueomm.facefile.utils.Quality;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -24,9 +17,16 @@ import com.restfb.exception.FacebookGraphException;
 import com.restfb.types.Photo;
 import com.restfb.types.Photo.Image;
 
+import it.manueomm.facefile.bean.AlbumWrapper;
+import it.manueomm.facefile.bean.PhotoWrapper;
+import it.manueomm.facefile.client.AppFacebookClient;
+import it.manueomm.facefile.converter.IAlbumConverter;
+import it.manueomm.facefile.exceptions.ConvertException;
+import it.manueomm.facefile.utils.Quality;
+
 /**
  * This class give you the possibily to read and convert any facebook album
- * 
+ *
  * @author Manuel Spigolon
  *
  */
@@ -64,7 +64,7 @@ public class FaceAlbumReader {
 
    /**
     * Build a any file with all the images of a pulic facebook album's
-    * 
+    *
     * @param albumId
     *           the pulic albumId to save
     * @param outputFile
@@ -91,7 +91,7 @@ public class FaceAlbumReader {
 
    /**
     * Read the information "fields", "images,name" of the albumId
-    * 
+    *
     * @param albumId
     * @return an album wrapper with list of all his photos from pagination
     * @throws FacebookGraphException
@@ -156,7 +156,7 @@ public class FaceAlbumReader {
 
    /**
     * Choose the image from the list by the image quality selected by the user
-    * 
+    *
     * @param images
     * @return
     */
@@ -209,7 +209,7 @@ public class FaceAlbumReader {
    /**
     * Create an instance of the facebook client at the version 2.5. If an
     * instance is already set, a new instance isn't created
-    * 
+    *
     * @return a DefaultFacebookClient instance with the an app token build with
     *         constructor's appId and appSecret
     */
@@ -222,7 +222,7 @@ public class FaceAlbumReader {
 
    /**
     * Add a converter for build an output file
-    * 
+    *
     * @param converter
     */
    public void addConverter(IAlbumConverter converter) {

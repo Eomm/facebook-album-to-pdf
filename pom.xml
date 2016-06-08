@@ -3,9 +3,16 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>it.manueomm</groupId>
 	<artifactId>facebook-album-to-file</artifactId>
-	<version>0.1.0</version>
+	<version>0.2.0</version>
 	<name>facebook-album-to-file</name>
 	<description>This tool allows to convert a facebook's album to any file.</description>
+	<properties>
+		<oltu.oauth2.version>1.0.1</oltu.oauth2.version>
+		<oltu.oidc.version>0.0.1-SNAPSHOT</oltu.oidc.version>
+		<org.springframework.version>3.2.4.RELEASE</org.springframework.version>
+		<servlet-api.version>2.5</servlet-api.version>
+		<slf4j.version>1.7.18</slf4j.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -31,6 +38,46 @@
 			<artifactId>logback-classic</artifactId>
 			<version>1.1.7</version>
 		</dependency>
+
+		<!-- OAuth Dependency -->
+		<dependency>
+			<artifactId>org.apache.oltu.oauth2.common</artifactId>
+			<groupId>org.apache.oltu.oauth2</groupId>
+			<version>${oltu.oauth2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.oltu.oauth2</groupId>
+			<artifactId>org.apache.oltu.oauth2.client</artifactId>
+			<version>${oltu.oauth2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.oltu.oauth2</groupId>
+			<artifactId>org.apache.oltu.oauth2.jwt</artifactId>
+			<version>${oltu.oauth2.version}</version>
+		</dependency>
+		<!-- OpenId Connect Dependency -->
+		<dependency>
+			<groupId>org.apache.oltu.openidconnect</groupId>
+			<artifactId>org.apache.oltu.openidconnect.common</artifactId>
+			<version>${oltu.oidc.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.oltu.openidconnect</groupId>
+			<artifactId>org.apache.oltu.openidconnect.client</artifactId>
+			<version>${oltu.oidc.version}</version>
+		</dependency>
+		<!-- OAuth Dynamic Registration Dependency -->
+		<dependency>
+			<groupId>org.apache.oltu.oauth2</groupId>
+			<artifactId>org.apache.oltu.oauth2.dynamicreg.client</artifactId>
+			<version>${oltu.oauth2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.oltu.oauth2</groupId>
+			<artifactId>org.apache.oltu.oauth2.dynamicreg.common</artifactId>
+			<version>${oltu.oauth2.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
