@@ -24,14 +24,23 @@ public class Utils {
       }
 
       String albumId = null;
-      int from = url.indexOf("a.");
+		int from = url.indexOf("a."); // old format
       if (from > -1) {
          String[] split = url.split("=a.");
-         int to = split[1].indexOf('.');
-         albumId = split[1].substring(0, to);
+			if (split.length > 0) {
+				int to = split[1].indexOf('.');
+				albumId = split[1].substring(0, to);
+			} else {
+				albumId = url;
+			}
       } else {
-         // i suppose the user has entered an album id
-         albumId = url;
+			from = url.indexOf("album_id="); // new format
+			if (from > -1) {
+				albumId = url.substring(from + 9, url.length());
+			} else {
+				// i suppose the user has entered an album id
+				albumId = url;
+			}
       }
 
       // TODO check if the id is only [a-z0-9]

@@ -7,10 +7,12 @@ import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient.AccessToken;
 import com.restfb.Version;
 import com.restfb.exception.FacebookOAuthException;
+import com.restfb.scope.ScopeBuilder;
+import com.restfb.scope.UserDataPermissions;
 
 /**
  * Retrieve and Store facebook token for calls the Facebook API
- * 
+ *
  * @author Manuel Spigolon
  *
  */
@@ -28,7 +30,7 @@ public class TokenFactory {
 
    /**
     * Instantiate an app token if needed
-    * 
+    *
     * @param appId
     * @param appSecret
     * @return an app token
@@ -45,12 +47,17 @@ public class TokenFactory {
          return token;
       }
    }
-   
-   public static AccessToken getUserToken() throws FacebookOAuthException{
-      // TODO: not implement yet
-      return null;
+
+   public static String getUserAuthLinkForToken(final String appId, final String redirect, UserDataPermissions... permissions) throws FacebookOAuthException {
+      DefaultFacebookClient client = new DefaultFacebookClient(Version.VERSION_2_5);
+
+      ScopeBuilder scope = new ScopeBuilder();
+      for (UserDataPermissions userDataPermissions : permissions) {
+         scope.addPermission(userDataPermissions);
+      }
+      return client.getLoginDialogUrl(appId, redirect, scope);
    }
-   
+
    /**
     * Remove from the caching a token
     * @param appId

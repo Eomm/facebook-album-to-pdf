@@ -21,6 +21,8 @@ import it.manueomm.facefile.bean.AlbumWrapper;
 import it.manueomm.facefile.bean.PhotoWrapper;
 import it.manueomm.facefile.client.AppFacebookClient;
 import it.manueomm.facefile.converter.IAlbumConverter;
+import it.manueomm.facefile.converter.INotifier;
+import it.manueomm.facefile.converter.INotifier.Type;
 import it.manueomm.facefile.exceptions.ConvertException;
 import it.manueomm.facefile.utils.Quality;
 
@@ -36,6 +38,7 @@ public class FaceAlbumReader {
 
    private String appId;
    private String appSecret;
+   private String userToken;
    private String workingPath;
 
    private FacebookClient facebookClient;
@@ -45,25 +48,31 @@ public class FaceAlbumReader {
 
    private Quality imageQuality;
    private List<IAlbumConverter> converters;
+   
+   private INotifier notifier;
 
-
-   public FaceAlbumReader(String appId, String appSecret) {
-      super();
-      this.appId = appId;
-      this.appSecret = appSecret;
+   private FaceAlbumReader() {
       this.imageQuality = Quality.HIGH;
       this.converters = new ArrayList<IAlbumConverter>(3);
       this.connectionTimeout = 10 * 1000; // 10 seconds
       this.readImageTimeout = 60 * 1000; // 60 seconds
    }
 
+   public FaceAlbumReader(String userToken, String workingPath) {
+      this();
+      this.userToken = userToken;
+      this.workingPath = workingPath;
+   }
+
    public FaceAlbumReader(String appId, String appSecret, String workingPath) {
-      this(appId, appSecret);
+      this();
+      this.appId = appId;
+		this.appSecret = appSecret;
       this.workingPath = workingPath;
    }
 
    /**
-    * Build a any file with all the images of a pulic facebook album's
+    * Build a any file with all the images of a facebook album's
     *
     * @param albumId
     *           the pulic albumId to save
@@ -74,13 +83,13 @@ public class FaceAlbumReader {
     * @throws IOException
     *            if there are some problems generating the files
     */
-   public List<File> convertPublicAlbum(final String albumId) throws FacebookGraphException, ConvertException {
+   public List<File> convertAlbum(final String albumId) throws FacebookGraphException, ConvertException {
       if (converters.size() == 0) {
          throw new ConvertException("There isn't any converter");
       }
 
       List<File> outFiles = new ArrayList<File>(converters.size());
-      AlbumWrapper album = this.readPublicAlbum(albumId);
+      AlbumWrapper album = this.readAlbum(albumId);
       for (IAlbumConverter iAlbumConverter : converters) {
          File created = iAlbumConverter.build(album);
          outFiles.add(created);
@@ -96,7 +105,7 @@ public class FaceAlbumReader {
     * @return an album wrapper with list of all his photos from pagination
     * @throws FacebookGraphException
     */
-   public AlbumWrapper readPublicAlbum(String albumId) throws FacebookGraphException {
+   public AlbumWrapper readAlbum(String albumId) throws FacebookGraphException {
       log.debug("Reading album.. " + albumId);
 
       // build a directory where store all the images
@@ -132,7 +141,7 @@ public class FaceAlbumReader {
 
          for (Photo photo : photosList) {
             String largeUrl = chooseImage(photo.getImages()).getSource();
-            File fileImage = new File(albumPath, photo.getName() + ".jpg");
+            File fileImage = new File(albumPath, photo.getId() + ".jpg");
 
             PhotoWrapper ph = new PhotoWrapper(photo, fileImage.getAbsolutePath());
             albumReaded.getPhotos().add(ph);
@@ -140,8 +149,11 @@ public class FaceAlbumReader {
             try {
                FileUtils.copyURLToFile(new URL(largeUrl), fileImage, connectionTimeout, readImageTimeout);
                log.debug("Saved image " + fileImage.getAbsolutePath());
+               sendNotifyInfo(fileImage.getAbsolutePath());
+               
             } catch (Exception ex) {
-               log.error("Error saving image: " + photo.getId(), ex);
+            	log.error("Error saving image: " + photo.getId(), ex);
+            	sendNotifyError(fileImage.getAbsolutePath());
                // XXX continue?
             }
          }
@@ -203,8 +215,21 @@ public class FaceAlbumReader {
          // this will not happen
          return images.get(0);
       }
-
    }
+   
+	private void sendNotifyInfo(String message) {
+		sendNotify(Type.INFO, message);
+	}
+
+	private void sendNotifyError(String message) {
+		sendNotify(Type.ERROR, message);
+	}
+
+	private void sendNotify(Type type, String message) {
+		if (notifier != null) {
+			notifier.update(type, message);
+		}
+	}
 
    /**
     * Create an instance of the facebook client at the version 2.5. If an
@@ -215,7 +240,11 @@ public class FaceAlbumReader {
     */
    private FacebookClient getFacebookClient() {
       if (facebookClient == null) {
-         facebookClient = new AppFacebookClient(appId, appSecret);
+         if (userToken == null) {
+            facebookClient = new AppFacebookClient(appId, appSecret);
+         } else {
+            facebookClient = new AppFacebookClient(userToken);
+         }
       }
       return facebookClient;
    }
@@ -283,4 +312,13 @@ public class FaceAlbumReader {
       this.readImageTimeout = readImageTimeout;
    }
 
+	public INotifier getNotifier() {
+		return notifier;
+	}
+
+	public void setNotifier(INotifier notifier) {
+		this.notifier = notifier;
+	}
+
+   
 }

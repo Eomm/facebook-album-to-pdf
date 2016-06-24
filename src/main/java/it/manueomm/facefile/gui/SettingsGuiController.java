@@ -85,7 +85,10 @@ public class SettingsGuiController {
 
          DirectoryChooser chooser = new DirectoryChooser();
          chooser.setTitle(resources.getString("config.btn.choose.title"));
-         chooser.setInitialDirectory(defaultDirectory);
+
+         if (defaultDirectory.exists() && defaultDirectory.isDirectory()) {
+            chooser.setInitialDirectory(defaultDirectory);
+         }
 
          File selectedDirectory = chooser.showDialog(mainApp.getPrimaryStage());
          this.savePath.setText(selectedDirectory.getAbsolutePath());

@@ -11,6 +11,7 @@ public class UserPreferences {
    public static final String KEY_FORMATS = "key.formats";
    public static final String KEY_PATH = "key.path";
    public static final String KEY_CLEAN = "key.clean";
+   public static final String KEY_USER_TOKEN = "key.user-token";
 
    private static final String DEFAULT_FORMATS = "PDF";
    private static final String DEFAULT_PATH = "C:/";
@@ -50,6 +51,18 @@ public class UserPreferences {
       }
    }
 
+   public static String getUserToken() {
+      return getPreferece(KEY_USER_TOKEN, null);
+   }
+
+	public static void setUserToken(String userToken) {
+		if (userToken != null && !userToken.isEmpty()) {
+			updatePreference(KEY_USER_TOKEN, userToken);
+		} else {
+			removePreference(KEY_USER_TOKEN);
+		}
+	}
+
    public static boolean isCleanOnComplete() {
       return new Boolean(getPreferece(KEY_CLEAN, DEFAULT_CLEAN));
    }
@@ -67,5 +80,10 @@ public class UserPreferences {
       Preferences prefs = Preferences.userNodeForPackage(FaceFileFx.class);
       prefs.put(key, value);
    }
+   
+	public static void removePreference(String key) {
+		Preferences prefs = Preferences.userNodeForPackage(FaceFileFx.class);
+		prefs.remove(key);
+	}
 
 }

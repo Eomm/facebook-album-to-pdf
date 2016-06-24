@@ -1,6 +1,7 @@
 package it.manueomm.facefile.launcher;
 
 import java.util.Locale;
+import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 import org.slf4j.Logger;
@@ -36,6 +37,7 @@ public class FaceFileFx extends Application {
       try {
          // Load root layout from fxml file.
          commonBundle = ResourceBundle.getBundle("bundles.faceFileGui", Locale.getDefault());
+			ResourceBundle appSettings = PropertyResourceBundle.getBundle("config.settings");
 
          FXMLLoader loader = new FXMLLoader();
          loader.setResources(commonBundle);
@@ -43,6 +45,9 @@ public class FaceFileFx extends Application {
          BorderPane rootLayout = (BorderPane) loader.load();
 
          FaceGuiController controller = loader.getController();
+			controller.setAppId(appSettings.getString("appid"));
+			controller.setAppSecr(appSettings.getString("secretid"));
+			controller.setCallbackUrl(appSettings.getString("callbackUrl"));
          controller.setMainApp(this);
 
          this.primaryStage.setTitle(commonBundle.getString("app.name"));
