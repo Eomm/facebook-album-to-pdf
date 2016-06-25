@@ -1,13 +1,13 @@
 package it.manueomm.facefile.client;
 
-import it.manueomm.facefile.utils.TokenFactory;
-
 import com.restfb.DefaultFacebookClient;
 import com.restfb.Version;
 
+import it.manueomm.facefile.utils.TokenFactory;
+
 /**
  * Extension of DefaultFacebookClient adding logic for manage app access token
- * 
+ *
  * @author Manuel Spigolon
  *
  */
@@ -16,11 +16,11 @@ public class AppFacebookClient extends DefaultFacebookClient {
    private String appId;
    private String appSecret;
 
-   private AccessToken appToken;
+   private AccessToken token;
 
    /**
     * Build a token with the given appid an appsecret
-    * 
+    *
     * @param appId
     * @param appSecret
     */
@@ -29,8 +29,15 @@ public class AppFacebookClient extends DefaultFacebookClient {
       this.appId = appId;
       this.appSecret = appSecret;
 
-      appToken = TokenFactory.getAppToken(appId, appSecret);
-      this.accessToken = appToken.getAccessToken();
+      token = TokenFactory.getAppToken(appId, appSecret);
+      this.accessToken = token.getAccessToken();
+   }
+
+   public AppFacebookClient(String userToken) {
+      super(userToken, Version.VERSION_2_5);
+
+      token = AccessToken.fromQueryString("access_token=" + userToken);
+      this.accessToken = token.getAccessToken();
    }
 
    public String getAppId() {
@@ -41,8 +48,8 @@ public class AppFacebookClient extends DefaultFacebookClient {
       return appSecret;
    }
 
-   public AccessToken getAppToken() {
-      return appToken;
+   public AccessToken getToken() {
+      return token;
    }
 
 }

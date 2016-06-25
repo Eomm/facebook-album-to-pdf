@@ -3,15 +3,20 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>it.manueomm</groupId>
 	<artifactId>facebook-album-to-file</artifactId>
-	<version>0.1.0</version>
+	<version>0.2.0</version>
 	<name>facebook-album-to-file</name>
 	<description>This tool allows to convert a facebook's album to any file.</description>
+	<properties>
+		<org.springframework.version>3.2.4.RELEASE</org.springframework.version>
+		<servlet-api.version>2.5</servlet-api.version>
+		<slf4j.version>1.7.18</slf4j.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.restfb</groupId>
 			<artifactId>restfb</artifactId>
-			<version>1.21.1</version>
+			<version>1.25.0</version>
 		</dependency>
 
 		<dependency>
@@ -31,6 +36,7 @@
 			<artifactId>logback-classic</artifactId>
 			<version>1.1.7</version>
 		</dependency>
+
 	</dependencies>
 
 	<build>

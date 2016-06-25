@@ -1,15 +1,15 @@
 package it.manueomm.facefile.converter.impl;
 
-import it.manueomm.facefile.bean.AlbumWrapper;
-import it.manueomm.facefile.converter.IAlbumConverter;
-import it.manueomm.facefile.exceptions.ConvertException;
-import it.manueomm.facefile.utils.pdf.PDFAlbumCreator;
-import it.manueomm.facefile.utils.pdf.event.PageNumberEvent;
-
 import java.io.File;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import it.manueomm.facefile.bean.AlbumWrapper;
+import it.manueomm.facefile.converter.IAlbumConverter;
+import it.manueomm.facefile.converter.pdf.PDFAlbumCreator;
+import it.manueomm.facefile.converter.pdf.PageNumberEvent;
+import it.manueomm.facefile.exceptions.ConvertException;
 
 public class PdfConverter implements IAlbumConverter {
 
@@ -30,6 +30,7 @@ public class PdfConverter implements IAlbumConverter {
       this(new File(outputFile));
    }
 
+   @Override
    public File build(AlbumWrapper album) throws ConvertException {
       try {
          if (outputFile == null) {
@@ -38,7 +39,7 @@ public class PdfConverter implements IAlbumConverter {
                outputFile = new File(firstImage.getParent(), "Album " + album.getName() + ".pdf");
                log.warn("Auto setting outputFile: " + outputFile.getAbsolutePath());
             } else {
-               throw new ConvertException("Cannot convert file: no outputFile defined");
+               throw new ConvertException("Cannot convert file: zero photos");
             }
          }
 
