@@ -51,7 +51,7 @@ public class FaceFileFx extends Application {
          controller.setMainApp(this);
 
          this.primaryStage.setTitle(commonBundle.getString("app.name"));
-         this.primaryStage.getIcons().add(new Image("file://images/icon.png"));
+			this.primaryStage.getIcons().add(new Image("/images/icon.png"));
          this.primaryStage.setScene(new Scene(rootLayout));
          this.primaryStage.show();
 
