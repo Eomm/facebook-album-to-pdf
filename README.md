@@ -1,11 +1,11 @@
 # facebook-album-to-file
 This tool allows to convert a facebook's album to a any document, like PDF!
 
-##HOW USE IT!
+## HOW USE IT!
 - Download the installer *build/gui/facebook-album-to-file-0.2.exe* for windows
 - Install and enjoy!
 
-###Screenshoot
+### Screenshoot
 The app  
 ![The app](http://miorepository.altervista.org/private/oauth/screen/01.png)
 
@@ -24,7 +24,7 @@ Start download
 Here your Album!!  
 ![Generated](http://miorepository.altervista.org/private/oauth/screen/07.png)
 
-##For nerdy devs
+## For nerdy devs
 
 ### Prerequisites for developers
 - Java (JRE) >= 1.8 [download]
